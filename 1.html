@@ -1,0 +1,47 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type = "text/babel">
+      const allNames = [
+        {id: '1', value: 'nikku'},
+        {id: '2', value: 'nikhil'},
+        {id: '3', value: 'reddy'},
+        {id: '4', value: 'work1'},
+        {id: '5', value: 'work2'},
+      ]
+      function App() {
+        const[names, setNames] = React.useState(allNames)
+        function addName(){
+          setNames([...names,allNames.find(i => !names.includes(i))])
+        }
+        function removeName(name) {
+          setNames(names.filter(i => i !== name))
+        }
+
+        return (
+          <div>
+            <label>Enter a name:</label>{' '}
+            <button disabled={names.length >= allNames.length} onClick={addName}>Submit</button>
+            <ul style={{listStyle: 'none', paddingLeft: 0}}>
+              {names.map(name => {
+                <li key={name.id}>
+                  <button onClick={() => removeName(name)}>remove</button>{' '}
+                  <label htmlFor={`${name.value}-input`}>{name.value}</label>{' '}
+                  <input id={`${name.value}-input`} defaultValue={name.value} />
+                </li>
+              })}
+            </ul>
+          </div>
+        )
+      }
+
+      ReactDOM.render(<App />, document.getElementById('root'))
+
+    </script>
+  </body>
+</html>
