@@ -8,11 +8,11 @@
     <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
     <script type = "text/babel">
       const allNames = [
-        {id: '1', value: 'work1'},
-        {id: '2', value: 'work2'},
-        {id: '3', value: 'work3'},
-        {id: '4', value: 'work4'},
-        {id: '5', value: 'work5'},
+        {id: '1', value: 'Mark in'},
+        {id: '2', value: '10:30-Team-scrum'},
+        {id: '3', value: '11:00-Group-scrum'},
+        {id: '4', value: '1:00-work readings'},
+        {id: '5', value: 'Mark out'},
       ]
       function App() {
         const[names, setNames] = React.useState(allNames)
@@ -25,14 +25,14 @@
 
         return (
           <div>
-            <label>Enter a name:</label>{' '}
+            <label>Enter a work:</label>{' '}
             <button disabled={names.length >= allNames.length} onClick={addName}>Submit</button>
             <ul style={{listStyle: 'none', paddingLeft: 0}}>
               {names.map(name => (
                 <li key={name.id}>
                   <input type="checkbox" onClick={() => removeName(name)} />{' '}
                   <label htmlFor={`${name.value}-input`}>{name.value}</label>{' '}
-                  
+
                 </li>
               ))}
             </ul>
