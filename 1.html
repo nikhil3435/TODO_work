@@ -28,13 +28,13 @@
             <label>Enter a name:</label>{' '}
             <button disabled={names.length >= allNames.length} onClick={addName}>Submit</button>
             <ul style={{listStyle: 'none', paddingLeft: 0}}>
-              {names.map(name => {
+              {names.map(name => (
                 <li key={name.id}>
                   <button onClick={() => removeName(name)}>remove</button>{' '}
                   <label htmlFor={`${name.value}-input`}>{name.value}</label>{' '}
                   <input id={`${name.value}-input`} defaultValue={name.value} />
                 </li>
-              })}
+              ))}
             </ul>
           </div>
         )
