@@ -8,23 +8,22 @@
     <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
     <script type = "text/babel">
       const allNames = [
-        {id: '1', value: 'Mark in', checked: false },
-        {id: '2', value: '10:30-Team-scrum', checked: false },
-        {id: '3', value: '11:00-Group-scrum', checked: false },
-        {id: '4', value: '1:00-work readings', checked: false },
-        {id: '5', value: 'Mark out', checked: false},
+        {id:'0', value:'mark-in', checked: false},
       ]
       let counter = allNames.length
-      function App() {
-
+      const App = () => {
         const[names, setNames] = React.useState(allNames)
-        function addName(){
-          setNames([...names, {id: counter, value: document.getElementById("newTask").value, checked: false}])
-          document.getElementById("newTask").value="";
-          counter=counter+1;
+        const[newTask, setNewTask] = React.useState("")
+
+        const addName = () => {
+          const tI = names.slice();
+          tI.unshift({id: counter, value: newTask, checked: false})
+          setNames(tI)
+          setNewTask("")
+          counter = counter+1;
         }
 
-        function handleChange(name) {
+        const handleChange = (name) => {
           const tI = names.slice();
           tI.find(function(i){ return i===name}).checked = !tI.find(function(i){ return i===name}).checked;
           setNames(tI)
@@ -33,8 +32,8 @@
 
         return (
           <div>
-            <input type="textbox" id="newTask"/> 
-            <button onClick={addName}>Add Task</button>
+            <input type="textbox" id="newTask" onChange= {(event)  => setNewTask(event.target.value)} value={newTask}/> 
+            <button onClick={() => {return addName()}}>Add Task</button>
             <ul style={{listStyle: 'none', paddingLeft: 0}}>
               {names.map(name => (
                 <li key={name.id}>
